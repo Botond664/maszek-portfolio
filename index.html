@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portfolio — Navigation</title>
+    <style>
+        :root{--bg:#0f1720;--accent:#06b6d4;--muted:#94a3b8;--surface:#0b1220}
+        *{box-sizing:border-box}
+        body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#fff;color:#0b1220}
+        header{background:var(--bg);color:#fff;position:sticky;top:0;z-index:20}
+        .wrap{max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem}
+        .brand{font-weight:700;letter-spacing:.2px}
+        nav ul{list-style:none;margin:0;padding:0;display:flex;gap:.5rem;align-items:center}
+        nav a{color:#fff;text-decoration:none;padding:.45rem .7rem;border-radius:6px;transition:background .15s, color .15s}
+        nav a:hover, nav a:focus{background:rgba(255,255,255,.06);outline:none}
+        .menu-toggle{display:none;background:none;border:0;color:#fff;font-size:1.2rem;padding:.25rem}
+        @media (max-width:680px){
+            .menu-toggle{display:block}
+            nav ul{position:absolute;left:0;right:0;top:58px;background:var(--surface);flex-direction:column;padding:.5rem 1rem;display:none}
+            nav ul.show{display:flex}
+            nav a{color:#e6eef6}
+        }
+        main{max-width:1000px;margin:2rem auto;padding:0 1rem}
+        section{padding:3rem 0;border-bottom:1px solid #eef2f7}
+        h1,h2{margin:.2rem 0}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="wrap">
+            <div class="brand">My Portfolio</div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="primary-nav">☰</button>
+            <nav id="primary-nav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="home"><h1>Home</h1><p>Intro or hero content.</p></section>
+        <section id="about"><h2>About</h2><p>Short bio.</p></section>
+        <section id="projects"><h2>Projects</h2><p>Showcase items.</p></section>
+        <section id="contact"><h2>Contact</h2><p>How to reach you.</p></section>
+    </main>
+
+    <script>
+        const btn = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav ul');
+        btn.addEventListener('click', () => {
+            const open = nav.classList.toggle('show');
+            btn.setAttribute('aria-expanded', open);
+        });
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('nav a').forEach(a=>a.addEventListener('click', ()=>{nav.classList.remove('show');btn.setAttribute('aria-expanded', false)}));
+    </script>
+</body>
+</html>
